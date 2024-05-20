@@ -1,5 +1,4 @@
 import pandas as pd
-import threading as th
 import time as t
 
 # String Constants
@@ -8,14 +7,15 @@ LINE_BREAK = "--------------"
 FILE_NAME = "input.txt"
 
 # Welcome and Reading File
-print(WELCOME_MESSAGE)
 print(LINE_BREAK)
+print(WELCOME_MESSAGE)
 
 f = open(FILE_NAME, "r", encoding="utf-8")
 lines = f.readlines()
 f.close()
 
 data = []
+start_time = t.time()
 
 for line in lines:
     # Processing Each Line
@@ -32,8 +32,23 @@ for line in lines:
 
     message = line[line.find(": ") + 2:]
 
-    data.append({"date" : date,
-                 "time" : time,
-                 "am_pm" : am_pm,
-                 ""
+    if date_split_index == - 1 or time_split_index == - 1 or sender_split_index == - 1 or line.find(": ") == - 1 or line.find("M") == - 1 or line.find(' - ') == - 1:
+        continue
+
+    data.append({"date": date,
+                 "time": time,
+                 "am_pm": am_pm,
+                 "sender": sender,
+                 "message": message
                  })
+
+
+myDF = pd.DataFrame(data)
+end_time = t.time()
+print("File Processing Completed in", round((end_time - start_time) * 1000, 3), "milliseconds")
+
+senders = []
+for user in myDF["sender"]:
+    if user not in senders:
+        senders.append(user)
+
