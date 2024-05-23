@@ -7,6 +7,7 @@ FILE_NAME = "input.txt"
 # Welcome and Reading File
 print("--------------")
 print("Welcome to WhatsApp Chat Processor")
+print("This is a Program Developed by Aayush Talreja to analyze WhatsApp chats provided as a .txt file")
 
 f = open(FILE_NAME, "r", encoding="utf-8")
 lines = f.readlines()
