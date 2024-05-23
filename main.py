@@ -17,6 +17,7 @@ senders = []
 words = {}
 start_time = t.time()
 instagram_count = 0 
+tiktok_count = 0
 
 for line in lines:
     date_split_index = line.find(", ")
@@ -45,6 +46,8 @@ for line in lines:
             words[word] += 1
             if "www.instagram" in word:
                 instagram_count += 1
+            else if "www.tiktok" in word:  
+                tiktok_count += 1
         else:
             words[word.strip()] = 1
 
